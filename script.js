@@ -33,11 +33,7 @@ function moveToDock (div) {
 }
 
 function handleClick (e) {
-    if (moveDisc) {
-        moveToDock(this)
-    } else {
-        selectDock(this)
-    }
+    moveDisc ? moveToDock(this) : selectDock(this)
     moveDisc = !moveDisc
 }  
 
