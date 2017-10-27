@@ -17,10 +17,17 @@ function checkIfDisc (div) {
     return div.getElementsByTagName("div").length === 0
 }
 
+function toggleMoveType () {
+    moveDisc = !moveDisc
+}
+
 function selectDock (div) {
     selectedDock = getFirstDisc(div)
+    // Escapes event if person clicks empty div.
+    if (!selectedDock) return
     origDiv = div
     div.className += " selected"
+    toggleMoveType()
 }
 
 function moveToDock (div) {
@@ -30,11 +37,11 @@ function moveToDock (div) {
         score.innerHTML = moves
     }
     origDiv.classList.remove("selected")
+    toggleMoveType()
 }
 
 function handleClick (e) {
     moveDisc ? moveToDock(this) : selectDock(this)
-    moveDisc = !moveDisc
 }  
 
 Array.from(document.getElementsByClassName("dock")).forEach(dock => {
