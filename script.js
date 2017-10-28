@@ -3,48 +3,47 @@ let moveDisc = false
 let selectedDock = null
 let origDiv = null
 
-let scoreDiv = document.getElementById("#score")
+let scoreDiv = document.getElementById('#score')
 
 function getFirstDisc (div) {
-    return div.getElementsByTagName("div")[0]
+  return div.getElementsByTagName('div')[0]
 }
 
 function checkDiscSizes (divOne, divTwo) {
-    return getFirstDisc(divOne).dataset.size > divTwo.dataset.size
+  return getFirstDisc(divOne).dataset.size > divTwo.dataset.size
 }
 
 function checkIfDisc (div) {
-    return div.getElementsByTagName("div").length === 0
+  return div.getElementsByTagName('div').length === 0
 }
 
 function toggleMoveType () {
-    moveDisc = !moveDisc
+  moveDisc = !moveDisc
 }
 
 function selectDock (div) {
-    selectedDock = getFirstDisc(div)
-    // Escapes event if person clicks empty div.
-    if (!selectedDock) return
-    origDiv = div
-    div.className += " selected"
-    toggleMoveType()
+  selectedDock = getFirstDisc(div)
+  // Escapes event if person clicks empty div.
+  if (!selectedDock) return
+  origDiv = div
+  div.className += ' selected'
+  toggleMoveType()
 }
 
 function moveToDock (div) {
-    if (checkIfDisc(div) || checkDiscSizes(div, selectedDock)) {
-        moves ++
-        div.insertBefore(selectedDock, div.firstChild)
-        score.innerHTML = moves
-    }
-    origDiv.classList.remove("selected")
-    toggleMoveType()
+  if (checkIfDisc(div) || checkDiscSizes(div, selectedDock)) {
+    moves++
+    div.insertBefore(selectedDock, div.firstChild)
+    scoreDiv.innerHTML = moves
+  }
+  origDiv.classList.remove('selected')
+  toggleMoveType()
 }
 
 function handleClick (e) {
-    moveDisc ? moveToDock(this) : selectDock(this)
-}  
+  moveDisc ? moveToDock(this) : selectDock(this)
+}
 
-Array.from(document.getElementsByClassName("dock")).forEach(dock => {
-    dock.addEventListener("click", handleClick)
+Array.from(document.getElementsByClassName('dock')).forEach(dock => {
+  dock.addEventListener('click', handleClick)
 })
-
