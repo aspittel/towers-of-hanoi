@@ -3,7 +3,7 @@ let moveDisc = false
 let selectedDock = null
 let origDiv = null
 
-let scoreDiv = document.getElementById('#score')
+let scoreDiv = document.getElementById('score')
 
 function getFirstDisc (div) {
   return div.getElementsByTagName('div')[0]
@@ -34,6 +34,7 @@ function moveToDock (div) {
   if (checkIfDisc(div) || checkDiscSizes(div, selectedDock)) {
     moves++
     div.insertBefore(selectedDock, div.firstChild)
+    console.log(scoreDiv)
     scoreDiv.innerHTML = moves
   }
   origDiv.classList.remove('selected')
